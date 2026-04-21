@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  golang:
+    image: deathwalker66/golang
+    container_name: DEV.GOLang
+    hostname: dev-golang  # Buena práctica añadir hostname
+    volumes:
+      - type: bind
+        source: ./APP
+        target: /APP
+      - type: bind
+        source: /mnt/Dock/Com
+        target: /COM
+      - type: bind
+        source: ./SCP
+        target: /SCP
+      - type: bind
+        source: ./LOG
+        target: /var/log
+    ports:
+      - target: 22
+        published: 30122
+        protocol: tcp
+        mode: host  # Mejor rendimiento para SSH
+    networks:
+      - catnet
+    env_file: 
+      - .env
+    restart: unless-stopped  # Buena práctica para servicios
+    security_opt:
+      - no-new-privileges:true  # Mejor seguridad
+
+networks:
+  catnet:
+    name: catnet  # Definición explícita
+    external: true  # La red ya existe externamente

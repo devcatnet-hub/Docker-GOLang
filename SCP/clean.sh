@@ -23,4 +23,6 @@
     /usr/share/man/* \
     /usr/share/info/*
 
+    rm -rf /var/log/*
+
     

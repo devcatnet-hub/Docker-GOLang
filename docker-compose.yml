@@ -14,9 +14,6 @@ services:
       - type: bind
         source: ./SCP
         target: /SCP
-      - type: bind
-        source: ./LOG
-        target: /var/log
     ports:
       - target: 22
         published: 30122
